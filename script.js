@@ -85,5 +85,10 @@ function totalFunc() {
 }
 function plusFunc() {
     storeValue();
-    totalFunc = (firstValue, secondValue) => parseInt(firstValue) + parseInt(secondValue);
+    totalFunc = (firstValue, secondValue) => (+firstValue) + (+secondValue);
 };
+
+function totalFunc(method) {
+    total = (+firstValue) +method+ (+secondValue);
+    console.log(total);
+}
