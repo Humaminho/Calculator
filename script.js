@@ -60,7 +60,8 @@ function clearDisplay() {
   displayValue = 0;
   render();
 };
-
+firstValue = "15";
+secondValue = "5";
 function addNumber(num) {
     if (displayValue === 0) {
         displayValue = num;
@@ -85,10 +86,7 @@ function totalFunc() {
 }
 function plusFunc() {
     storeValue();
-    totalFunc = (firstValue, secondValue) => (+firstValue) + (+secondValue);
+    totalFunc = (firstValue, secondValue) => {
+        console.log((+firstValue) + (+secondValue)) ;
+    };
 };
-
-function totalFunc(method) {
-    total = (+firstValue) +method+ (+secondValue);
-    console.log(total);
-}
