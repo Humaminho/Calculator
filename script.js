@@ -21,18 +21,20 @@ const num9 = document.querySelector(".num9");
 const num0 = document.querySelector(".num0");
 const dot = document.querySelector(".dot");
 
-let displayValue = 0;
-let firstValue = 0;
-let secondValue = 0;
+let displayVal = 0;
+let firstVal = 0;
+let secondVal = 0;
+
+
 
 clear.addEventListener("click", clearAll);
-plus.addEventListener("click", plusFunc); /*
+plus.addEventListener("click", plusFunc);
 percent.addEventListener("click", percentFunc);
 divide.addEventListener("click", divideFunc);
 times.addEventListener("click", timesFunc);
 minus.addEventListener("click", minusFunc);
-plusMinus.addEventListener("click", negativeFunc); */
-total.addEventListener("click", totalFunc);
+//plusMinus.addEventListener("click", negativeFunc);
+total.addEventListener("click", operate);
 
 num1.addEventListener("click", () => addNumber(1));
 num2.addEventListener("click", () => addNumber(2));
@@ -46,47 +48,92 @@ num9.addEventListener("click", () => addNumber(9));
 num0.addEventListener("click", () => addNumber(0));
 //dot.addEventListener("click", dotFunc);
 
+let resolveFunc = function() {
+    return "empty";
+};
+
 function render() {
-    display.textContent = displayValue;
+    display.textContent = displayVal;
 };
 
 function clearAll() {
-    firstValue = 0;
-    secondValue = 0;
+    firstVal = 0;
+    secondVal = 0;
+    resolveFunc = function() {
+        return "empty";
+    };
     clearDisplay();
 };
 
 function clearDisplay() {
-  displayValue = 0;
+  displayVal = 0;
   render();
 };
-firstValue = "15";
-secondValue = "5";
 function addNumber(num) {
-    if (displayValue === 0) {
-        displayValue = num;
+    if (displayVal == 0) {
+        displayVal = `${num}`;
         render();
     } else {
-    displayValue += `${num}`;
+    displayVal += `${num}`;
     render();
     };
 };
 
-function storeValue() {
-    if (firstValue ===0 ){
-        firstValue = displayValue;
+function storeVal() {
+    if (displayVal == 0 ){
         clearDisplay();
-    } else {
-        secondValue = displayValue;
+    } else if ( firstVal == 0) {
+        firstVal = displayVal;
         clearDisplay();
-    }
-};
-function totalFunc() {
-    console.log("zbi");
-}
-function plusFunc() {
-    storeValue();
-    totalFunc = (firstValue, secondValue) => {
-        console.log((+firstValue) + (+secondValue)) ;
+    } else if ( firstVal !== 0) {
+        secondVal = displayVal;
+        clearDisplay();
     };
 };
+
+function operate() {
+        if (firstVal ==0 && secondVal == 0) {
+            console.log("working")
+        } else {
+            storeVal();
+            resolveFunc(firstVal, secondVal);
+            render();
+            secondVal = 0;
+            firstVal = 0;
+        }
+        
+    };
+    
+//}
+function plusFunc() {
+    storeVal();
+    resolveFunc = function(firstVal, secondVal) {
+        displayVal = (+firstVal) + (+secondVal);
+    };
+};
+function minusFunc() {
+    storeVal();
+    resolveFunc = function(firstVal, secondVal) {
+        displayVal = (+firstVal) - (+secondVal);
+    }
+};
+function timesFunc() {
+    storeVal();
+    resolveFunc = function(firstVal, secondVal) {
+        displayVal = (+firstVal) * (+secondVal);
+    }
+};
+function divideFunc() {
+    storeVal();
+    resolveFunc = function(firstVal, secondVal) {
+        displayVal = (+firstVal) / (+secondVal);
+    }
+};
+function percentFunc() {
+    displayVal = displayVal / 100;
+    render();
+};
+
+console.log("firstVal:"+firstVal)
+console.log("secondVal:"+secondVal)
+console.log("displayVal:"+displayVal)
