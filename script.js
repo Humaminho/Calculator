@@ -33,7 +33,7 @@ percent.addEventListener("click", percentFunc);
 divide.addEventListener("click", divideFunc);
 times.addEventListener("click", timesFunc);
 minus.addEventListener("click", minusFunc);
-//plusMinus.addEventListener("click", negativeFunc);
+plusMinus.addEventListener("click", negativeFunc);
 total.addEventListener("click", operate);
 
 num1.addEventListener("click", () => addNumber(1));
@@ -53,16 +53,10 @@ let resolveFunc = function() {
 };
 
 function render() {
-    display.textContent = displayVal;
-};
-
-function clearAll() {
-    firstVal = 0;
-    secondVal = 0;
-    resolveFunc = function() {
-        return "empty";
-    };
-    clearDisplay();
+    if (typeof displayVal === "string") {
+        display.textContent = displayVal;
+    } else display.textContent = Math.round((+displayVal)*100000)/100000;
+    
 };
 
 function clearDisplay() {
@@ -77,6 +71,15 @@ function addNumber(num) {
     displayVal += `${num}`;
     render();
     };
+};
+
+function clearAll() {
+    firstVal = 0;
+    secondVal = 0;
+    resolveFunc = function() {
+        return "empty";
+    };
+    clearDisplay();
 };
 
 function storeVal() {
@@ -98,41 +101,58 @@ function operate() {
             storeVal();
             resolveFunc(firstVal, secondVal);
             render();
+            firstVal = displayVal;
+            displayVal = 0;
             secondVal = 0;
-            firstVal = 0;
-        }
-        
+        };
     };
-    
-//}
+
 function plusFunc() {
     storeVal();
+    if (!firstVal == 0 && !secondVal == 0) operate();
     resolveFunc = function(firstVal, secondVal) {
         displayVal = (+firstVal) + (+secondVal);
     };
 };
 function minusFunc() {
     storeVal();
+    if (!firstVal == 0 && !secondVal == 0) operate();
     resolveFunc = function(firstVal, secondVal) {
         displayVal = (+firstVal) - (+secondVal);
     }
 };
 function timesFunc() {
     storeVal();
+    if (!firstVal == 0 && !secondVal == 0) operate();
     resolveFunc = function(firstVal, secondVal) {
         displayVal = (+firstVal) * (+secondVal);
     }
 };
 function divideFunc() {
     storeVal();
+    if (!firstVal == 0 && !secondVal == 0) operate();
     resolveFunc = function(firstVal, secondVal) {
+        if (secondVal == 0) {
+            displayVal = "zbi²";
+        } else {
         displayVal = (+firstVal) / (+secondVal);
-    }
+        };
+    };
 };
 function percentFunc() {
     displayVal = displayVal / 100;
     render();
 };
+function negativeFunc() {
+    if (typeof displayVal == "number") {
+        displayVal*= -1;
+    } else if (displayVal.includes("-")) {
+        displayVal = displayVal.replace("-", "");
+    } else {
+        displayVal = "-" + displayVal;
+    };
+    render();
+}
 
 console.log("firstVal:"+firstVal)
 console.log("secondVal:"+secondVal)
