@@ -46,7 +46,7 @@ num7.addEventListener("click", () => addNumber(7));
 num8.addEventListener("click", () => addNumber(8));
 num9.addEventListener("click", () => addNumber(9));
 num0.addEventListener("click", () => addNumber(0));
-//dot.addEventListener("click", dotFunc);
+dot.addEventListener("click", dotFunc);
 
 let resolveFunc = function() {
     return "empty";
@@ -55,7 +55,10 @@ let resolveFunc = function() {
 function render() {
     if (typeof displayVal === "string") {
         display.textContent = displayVal;
-    } else display.textContent = Math.round((+displayVal)*100000)/100000;
+    } else {
+        display.textContent = (Math.round((+displayVal)*100000)/100000);
+        displayVal.toString();
+    };
     
 };
 
@@ -140,20 +143,28 @@ function divideFunc() {
     };
 };
 function percentFunc() {
-    displayVal = displayVal / 100;
+    if (displayVal == 0) {
+        displayVal = firstVal / 100;
+    } else displayVal = displayVal / 100;
     render();
 };
 function negativeFunc() {
-    if (typeof displayVal == "number") {
-        displayVal*= -1;
+    if (displayVal == 0) {
+        return;
     } else if (displayVal.includes("-")) {
         displayVal = displayVal.replace("-", "");
     } else {
         displayVal = "-" + displayVal;
     };
     render();
-}
-
-console.log("firstVal:"+firstVal)
-console.log("secondVal:"+secondVal)
-console.log("displayVal:"+displayVal)
+};
+function dotFunc() {
+    if (displayVal == 0) {
+        return;
+    } else if (displayVal.includes(".")) {
+        displayVal = displayVal;
+    } else {
+        displayVal = displayVal + ".";
+    };
+    render();
+};
