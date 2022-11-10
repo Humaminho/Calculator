@@ -67,6 +67,10 @@ function clearDisplay() {
   render();
 };
 function addNumber(num) {
+    // if (resolveFunc() == "empty" && firstVal !== 0) {
+    //     clearAll();
+    //     displayVal = num;
+    // };
     if (displayVal == 0) {
         displayVal = `${num}`;
         render();
@@ -98,17 +102,21 @@ function storeVal() {
 };
 
 function operate() {
-        if (firstVal ==0 && secondVal == 0) {
-            console.log("working")
-        } else {
-            storeVal();
-            resolveFunc(firstVal, secondVal);
-            render();
-            firstVal = displayVal;
-            displayVal = 0;
-            secondVal = 0;
+    if (firstVal ==0 && secondVal == 0) {
+        firstVal = 0;
+        console.log("working");
+    } else {
+        storeVal();
+        resolveFunc(firstVal, secondVal);
+        render();
+        firstVal = displayVal;
+        displayVal = 0;
+        secondVal = 0;
+        resolveFunc = function() {
+            return "empty";
         };
     };
+};
 
 function plusFunc() {
     storeVal();
@@ -145,6 +153,7 @@ function divideFunc() {
 function percentFunc() {
     if (displayVal == 0) {
         displayVal = firstVal / 100;
+        firstVal = 0;
     } else displayVal = displayVal / 100;
     render();
 };
@@ -168,3 +177,7 @@ function dotFunc() {
     };
     render();
 };
+console.log("displayVal: " + displayVal);
+console.log("firstVal: " + firstVal);
+console.log("secondVal: " + secondVal);
+console.log("resolveFunc: " + resolveFunc());
