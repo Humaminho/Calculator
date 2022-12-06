@@ -63,15 +63,11 @@ function render() {
 };
 
 function clearDisplay() {
-  displayVal = 0;
+  displayVal = "0";
   render();
 };
 function addNumber(num) {
-    // if (resolveFunc() == "empty" && firstVal !== 0) {
-    //     clearAll();
-    //     displayVal = num;
-    // };
-    if (displayVal == 0) {
+    if (displayVal === "0") {
         displayVal = `${num}`;
         render();
     } else {
@@ -109,8 +105,7 @@ function operate() {
         storeVal();
         resolveFunc(firstVal, secondVal);
         render();
-        firstVal = displayVal;
-        displayVal = 0;
+        firstVal = 0;
         secondVal = 0;
         resolveFunc = function() {
             return "empty";
@@ -168,16 +163,14 @@ function negativeFunc() {
     render();
 };
 function dotFunc() {
-    if (displayVal == 0) {
+    if (displayVal.includes(".")) {
         return;
-    } else if (displayVal.includes(".")) {
-        displayVal = displayVal;
     } else {
-        displayVal = displayVal + ".";
+        displayVal += ".";
     };
     render();
 };
 console.log("displayVal: " + displayVal);
 console.log("firstVal: " + firstVal);
 console.log("secondVal: " + secondVal);
-console.log("resolveFunc: " + resolveFunc());
+console.log("resolveFunc: " + resolveFunc);
