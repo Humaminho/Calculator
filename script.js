@@ -25,8 +25,6 @@ let displayVal = 0;
 let firstVal = 0;
 let secondVal = 0;
 
-
-
 clear.addEventListener("click", clearAll);
 plus.addEventListener("click", plusFunc);
 percent.addEventListener("click", percentFunc);
@@ -59,13 +57,13 @@ function render() {
         display.textContent = (Math.round((+displayVal)*100000)/100000);
         displayVal.toString();
     };
-    
 };
 
 function clearDisplay() {
   displayVal = "0";
   render();
 };
+
 function addNumber(num) {
     if (displayVal === "0") {
         displayVal = `${num}`;
@@ -170,10 +168,9 @@ function dotFunc() {
         displayVal += ".";
     } render();
 };
-console.log("displayVal: " + displayVal);
-console.log(typeof displayVal);
-console.log("firstVal: " + firstVal);
-console.log(typeof firstVal);
-console.log("secondVal: " + secondVal);
-console.log(typeof secondVal);
-console.log("resolveFunc: " + resolveFunc);
+
+// TESTS
+// console.log("displayVal: " + displayVal);
+// console.log("firstVal: " + firstVal);
+// console.log("secondVal: " + secondVal);
+// console.log("resolveFunc: " + resolveFunc);
