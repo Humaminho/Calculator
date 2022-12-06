@@ -99,8 +99,7 @@ function storeVal() {
 
 function operate() {
     if (firstVal ==0 && secondVal == 0) {
-        firstVal = 0;
-        console.log("working");
+        return;
     } else {
         storeVal();
         resolveFunc(firstVal, secondVal);
@@ -111,32 +110,33 @@ function operate() {
             return "empty";
         };
     };
+    displayVal = displayVal.toString();
 };
 
 function plusFunc() {
     storeVal();
-    if (!firstVal == 0 && !secondVal == 0) operate();
+    if (!secondVal == 0) operate();
     resolveFunc = function(firstVal, secondVal) {
         displayVal = (+firstVal) + (+secondVal);
     };
 };
 function minusFunc() {
     storeVal();
-    if (!firstVal == 0 && !secondVal == 0) operate();
+    if (!secondVal == 0) operate();
     resolveFunc = function(firstVal, secondVal) {
         displayVal = (+firstVal) - (+secondVal);
     }
 };
 function timesFunc() {
     storeVal();
-    if (!firstVal == 0 && !secondVal == 0) operate();
+    if (!secondVal == 0) operate();
     resolveFunc = function(firstVal, secondVal) {
         displayVal = (+firstVal) * (+secondVal);
     }
 };
 function divideFunc() {
     storeVal();
-    if (!firstVal == 0 && !secondVal == 0) operate();
+    if (!secondVal == 0) operate();
     resolveFunc = function(firstVal, secondVal) {
         if (secondVal == 0) {
             displayVal = "zbi²";
@@ -149,7 +149,9 @@ function percentFunc() {
     if (displayVal == 0) {
         displayVal = firstVal / 100;
         firstVal = 0;
-    } else displayVal = displayVal / 100;
+    } else {
+        displayVal = displayVal / 100;
+    } displayVal = displayVal.toString();
     render();
 };
 function negativeFunc() {
@@ -159,18 +161,19 @@ function negativeFunc() {
         displayVal = displayVal.replace("-", "");
     } else {
         displayVal = "-" + displayVal;
-    };
-    render();
+    } render();
 };
 function dotFunc() {
     if (displayVal.includes(".")) {
         return;
     } else {
         displayVal += ".";
-    };
-    render();
+    } render();
 };
 console.log("displayVal: " + displayVal);
+console.log(typeof displayVal);
 console.log("firstVal: " + firstVal);
+console.log(typeof firstVal);
 console.log("secondVal: " + secondVal);
+console.log(typeof secondVal);
 console.log("resolveFunc: " + resolveFunc);

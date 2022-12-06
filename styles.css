@@ -36,17 +36,18 @@ main {
     grid-column-gap: 12px;
     grid-row-gap: 12px;
     justify-items: center;
+    align-items: center;
 }
 button {
     height: 65px;
     width: 65px;
-    border: 0px;
+    border: none;
     border-radius: 50%;
     background: rgb(56, 56, 56);
     color: white;
     font-size: 25px;
     font-weight: 500;
-    transition: all 0.3s;
+    transition: all 0.2s;
 }
 .num0 {
     grid-column: 1 / span 2;
@@ -76,4 +77,3 @@ button {
     background-color: rgb(117, 117, 117);
     color: rgb(125, 190, 255);
 }
-/* GreenGoblin
