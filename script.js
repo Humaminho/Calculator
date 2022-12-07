@@ -21,7 +21,7 @@ const num9 = document.querySelector(".num9");
 const num0 = document.querySelector(".num0");
 const dot = document.querySelector(".dot");
 
-let displayVal = 0;
+let displayVal = "0";
 let firstVal = 0;
 let secondVal = 0;
 
